@@ -1,0 +1,65 @@
+sudo apt install apache2 subversion libapache2-mod-svn
+
+systemctl restart apache2
+sudo /etc/init.d/apache2 restart
+
+$REPOS_DIR/$REPO
+$HTPASSWD
+
+FULL_REPO_PATH="$REPOS_DIR/$REPO"
+mkdir -p $FULL_REPO_PATH
+svnadmin create $FULL_REPO_PATH
+# proper permision
+
+
+htpasswd -c $HTPASSWD user_name
+htpasswd $HTPASSWD user_name
+
+a2enmod
+a2dismod
+
+/etc/apache2/mods-
+available/
+
+a2enmod dav_svn
+a2enmod authz_svn
+
+
+/etc/apache2/mods-
+enabled/dav_svn.conf
+
+
+<Location /URL_IN_RESPECT_OF_SERVER_ROOT>
+DAV svn
+SVNParentPath $REPOS_DIR
+SVNPath $REPOS_DIR/$REPO
+AuthzSVNAccessFile $ACCESSFILE
+AuthType Basic
+AuthName "SVN Repo"
+AuthUserFile $HTPASSWD
+Require valid-user
+</Location>
+
+# check http://server_ip/URL_IN_RESPECT_OF_SERVER_ROOT/$REPO
+# http://server_ip/URL_IN_RESPECT_OF_SERVER_ROOT
+
+
+[groups]
+admins = user1
+group1 = user1,user2
+group2 = user3,user4
+[/]
+@admins = rw
+[$REPO:/]
+@group1 = rw
+@group2 = r
+[$REPO:/some_dir]
+user1 =
+
+
+chown www-data:www-data dir_of_file_name -R
+chmod u+rwxX dir_of_file_name [-R]
+
+svn checkout URL TO REPO --username USER_NAME
+svn add DIR_OR_FILE
+svn commit -m “message”

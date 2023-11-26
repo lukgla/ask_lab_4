@@ -1,0 +1,9 @@
+[/]
+
+[$REPO_1:/]
+user1 = rw
+user2 =
+
+[$REPO_2:/]
+user1 = r
+user2 = rw
